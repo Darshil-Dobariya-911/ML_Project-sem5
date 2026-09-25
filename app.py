@@ -10,7 +10,7 @@ from pathlib import Path
 # PAGE CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="CardioSense AI",
+    page_title="Heartzen",
     page_icon="🫀",
     layout="wide",
     initial_sidebar_state="expanded",
