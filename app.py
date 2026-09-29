@@ -270,9 +270,13 @@ def load_metadata():
 try:
     lr_model, rf_model = load_models()
 except Exception as e:
-    st.error("❌ Could not load model files. Please run `python3 train_models.py` first.")
-    st.exception(e)
-    st.stop()
+    st.warning("⚠️ Model version mismatch detected (likely due to different scikit-learn versions). Retraining models on the fly...")
+    import subprocess
+    subprocess.run(["python3", "train_models.py"], check=True)
+    # Clear the cache and try again
+    load_models.clear()
+    lr_model, rf_model = load_models()
+    st.success("✅ Models retrained successfully!")
 
 meta = load_metadata()
 
