@@ -857,8 +857,8 @@ elif page == "🔬  Prediction":
                         "Feature": ["Age", "Gender", "Height (cm)", "Weight (kg)",
                                      "Systolic BP", "Diastolic BP", "Cholesterol",
                                      "Glucose", "Smoker", "Alcohol", "Active", "BMI (display)"],
-                        "Value": [age, gender, height, weight, ap_hi, ap_lo,
-                                   cholesterol, gluc, smoke, alco, active, f"{bmi:.2f}"]
+                        "Value": [str(x) for x in [age, gender, height, weight, ap_hi, ap_lo,
+                                   cholesterol, gluc, smoke, alco, active, f"{bmi:.2f}"]]
                     })
                     st.dataframe(display, use_container_width=True, hide_index=True)
 
