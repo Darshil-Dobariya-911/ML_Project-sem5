@@ -274,13 +274,24 @@ def load_metadata():
 try:
     lr_model, rf_model = load_models()
 except Exception as e:
-    st.warning("⚠️ Model version mismatch detected (likely due to different scikit-learn versions). Retraining models on the fly...")
+    st.warning("⚠️ Model version mismatch detected. Retraining models on the fly to match Cloud environment...")
     import subprocess
-    subprocess.run(["python3", "train_models.py"], check=True)
-    # Clear the cache and try again
-    load_models.clear()
-    lr_model, rf_model = load_models()
-    st.success("✅ Models retrained successfully!")
+    import sys
+    try:
+        result = subprocess.run(
+            [sys.executable, str(BASE / "train_models.py")],
+            cwd=str(BASE),
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        load_models.clear()
+        lr_model, rf_model = load_models()
+        st.success("✅ Models retrained successfully!")
+    except subprocess.CalledProcessError as cpe:
+        st.error("❌ Auto-retraining failed.")
+        st.code(cpe.stdout + "\\n" + cpe.stderr)
+        st.stop()
 
 meta = load_metadata()
 
