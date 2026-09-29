@@ -1,0 +1,66 @@
+{
+  "logistic_regression": {
+    "name": "Logistic Regression (Fixed)",
+    "accuracy": 72.45,
+    "precision": 75.11,
+    "recall": 68.29,
+    "f1": 71.54,
+    "roc_auc": 78.98,
+    "train_acc": 72.44,
+    "diff": 0.01,
+    "cv_mean": 72.41,
+    "cv_std": 0.35,
+    "cv_folds": [
+      72.77,
+      71.93,
+      72.81,
+      72.4,
+      72.14
+    ],
+    "features": [
+      "age",
+      "gender",
+      "height",
+      "weight",
+      "ap_hi",
+      "ap_lo",
+      "cholesterol",
+      "gluc",
+      "smoke",
+      "alco",
+      "active"
+    ]
+  },
+  "random_forest": {
+    "name": "Random Forest",
+    "accuracy": 73.03,
+    "precision": 75.33,
+    "recall": 69.61,
+    "f1": 72.36,
+    "roc_auc": 79.91,
+    "train_acc": 75.43,
+    "diff": 2.4,
+    "cv_mean": 73.02,
+    "cv_std": 0.43,
+    "cv_folds": [
+      72.86,
+      72.63,
+      73.36,
+      73.69,
+      72.57
+    ],
+    "features": [
+      "age",
+      "gender",
+      "height",
+      "weight",
+      "ap_hi",
+      "ap_lo",
+      "cholesterol",
+      "gluc",
+      "smoke",
+      "alco",
+      "active"
+    ]
+  }
+}
