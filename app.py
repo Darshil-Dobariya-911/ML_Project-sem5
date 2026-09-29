@@ -255,8 +255,12 @@ BASE = Path(__file__).parent
 
 @st.cache_resource
 def load_models():
-    lr = joblib.load(BASE / "cardiovascular_lr_pipeline_v2.pkl")
-    rf = joblib.load(BASE / "cardiovascular_rf_pipeline_v2.pkl")
+    import warnings
+    with warnings.catch_warnings():
+        # Treat version mismatch warnings as errors to force auto-retraining
+        warnings.simplefilter("error")
+        lr = joblib.load(BASE / "cardiovascular_lr_pipeline_v2.pkl")
+        rf = joblib.load(BASE / "cardiovascular_rf_pipeline_v2.pkl")
     return lr, rf
 
 @st.cache_data
@@ -860,7 +864,7 @@ elif page == "🔬  Prediction":
                         "Value": [str(x) for x in [age, gender, height, weight, ap_hi, ap_lo,
                                    cholesterol, gluc, smoke, alco, active, f"{bmi:.2f}"]]
                     })
-                    st.dataframe(display, use_container_width=True, hide_index=True)
+                    st.dataframe(display, width='stretch', hide_index=True)
 
                 st.markdown("""
                 <div style='font-size:12px; color:#374151; margin-top:18px; padding:12px;
@@ -1030,7 +1034,7 @@ elif page == "📊  Model Insights":
             "Fold": [f"Fold {i}" for i in range(1, 6)],
             "Accuracy": [f"{s:.2f}%" for s in cv_arr]
         })
-        st.dataframe(fold_df, use_container_width=True, hide_index=True)
+        st.dataframe(fold_df, width='stretch', hide_index=True)
 
     with cv2:
         fig2, ax2 = plt.subplots(figsize=(7, 4))
